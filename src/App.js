@@ -19,11 +19,10 @@ function App() {
         setCity(null);
       }else {
         setCity({
-          city : search,
+          city : search.toUpperCase(),
           temp : res.main.temp,
           max : res.main.temp_max,
           min : res.main.temp_min,
-          weather : res.weather.main,
         })
       }
 
@@ -33,21 +32,22 @@ function App() {
 
   const handleShow = () =>{
     setShow(prev => !prev);
+    setSearch("");
+  }
+
+  const handleSearch = (event) =>{
+    setSearch(event.target.value);
   }
 
   const handleSubmit = (res) => {
-    setSearch(res);
-    
     if(!show) setShow(prev => !prev);
-
-    console.log(res);
   }
 
   return (
     <div className="h-screen w-screen p-4 flex flex-col justify-center space-y-1">
-      <SearchTab handleSubmit = {handleSubmit} value = {search} />
+      <SearchTab handleSearch = {handleSearch} handleSubmit = {handleSubmit} value = {search} />
       {
-        !city ? <InfoTab handleShow={handleShow} show = {show} city = {city} message = {"City Not Found"}/> : <InfoTab handleShow = {handleShow} show = {show} city = {city.city} temp = {city.temp} max = {city.max} min = {city.min} weather = {city.weather}/>
+        !city ? <InfoTab handleShow={handleShow} show = {show} city = {city} message = {"City Not Found"}/> : <InfoTab handleShow = {handleShow} show = {show} city = {city.city} temp = {city.temp} max = {city.max} min = {city.min}/>
       }
     </div>
   );
