@@ -15,13 +15,17 @@ function App() {
       const response = await fetch(url);
       const res = await response.json();
 
-      setCity({
-        city : search,
-        temp : res.main.temp,
-        max : res.main.temp_max,
-        min : res.main.temp_min,
-        weather : res.weather.main,
-      })
+      if(res.message === "city not found"){
+        setCity(null);
+      }else {
+        setCity({
+          city : search,
+          temp : res.main.temp,
+          max : res.main.temp_max,
+          min : res.main.temp_min,
+          weather : res.weather.main,
+        })
+      }
 
     }
     fetchApi();
@@ -43,7 +47,7 @@ function App() {
     <div className="h-screen w-screen p-4 flex flex-col justify-center space-y-1">
       <SearchTab handleSubmit = {handleSubmit} value = {search} />
       {
-        !city ? <InfoTab city = {city} message = {"No data Found"}/> : <InfoTab handleShow = {handleShow} show = {show} city = {city.city} temp = {city.temp} max = {city.max} min = {city.min} weather = {city.weather}/>
+        !city ? <InfoTab handleShow={handleShow} show = {show} city = {city} message = {"City Not Found"}/> : <InfoTab handleShow = {handleShow} show = {show} city = {city.city} temp = {city.temp} max = {city.max} min = {city.min} weather = {city.weather}/>
       }
     </div>
   );

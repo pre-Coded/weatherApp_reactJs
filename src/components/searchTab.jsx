@@ -11,7 +11,7 @@ const SearchTab = ({handleSubmit}) => {
 
   return (
     <div className='w-full flex justify-between transition-all'>
-        <input onChange={handleInput} className='h-16 w-full p-4 text-2xl text-gray-500 rounded-lg border-l-2 border-t-2 outline-none shadow-lg'  type="search" name="" id="" placeholder='Enter city' autocapitalize='words'/>
+        <input onChange={handleInput} className='h-16 w-full p-4 text-2xl text-gray-500 rounded-lg border-l-2 border-t-2 outline-none shadow-lg'  type="search" name="" id="" placeholder='Enter city' autoCapitalize='words'/>
         <button onClick={()=>{
             handleSubmit(input);
         }} className='bg-blue-400 h-16 aspect-square text-xl text-white rounded-lg border-y-2 border-r-2 shadow-lg'> Go </button>
